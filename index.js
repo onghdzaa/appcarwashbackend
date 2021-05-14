@@ -3,8 +3,8 @@ const app = express();
 //const cors = require("cors");
 //const pool = require("./db");
 //const bodyParser = require("body-parser");
-const port=process.env.port || 80
-port=80
+//const port=process.env.port || 80
+// port=80
 // const { json } = require("body-parser");
 // const { response } = require("express");
 // const { Connection } = require("pg");
@@ -612,7 +612,7 @@ app.get('/', (req, res) => {
 // });
 app.listen(80, () => {
   
-  console.log(80);
+  console.log('Application is running on port 9000')
 });
 // module.exports = {
 //   presets: [
