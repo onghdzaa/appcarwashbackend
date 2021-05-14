@@ -4,6 +4,7 @@ const cors = require("cors");
 const pool = require("./db");
 const bodyParser = require("body-parser");
 const port=process.env.port || 80
+port=80
 // const { json } = require("body-parser");
 // const { response } = require("express");
 // const { Connection } = require("pg");
