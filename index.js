@@ -1,23 +1,23 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
-const pool = require("./db");
-const bodyParser = require("body-parser");
+//const cors = require("cors");
+//const pool = require("./db");
+//const bodyParser = require("body-parser");
 const port=process.env.port || 80
 port=80
 // const { json } = require("body-parser");
 // const { response } = require("express");
 // const { Connection } = require("pg");
 
-app.use(express.json({limit: '50mb'}));
+//app.use(express.json({limit: '50mb'}));
 // เก็บไว้ก้อน
 // const corsOptions = {
 //   origin: "http://localhost:8080",
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 //app.use(cors(corsOptions));
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json({limit: '50mb', extended: true}));
+//app.use(bodyParser.urlencoded({ extended: true }));
 //var sess;
 // fierbase
 // var firebaseConfig = {
