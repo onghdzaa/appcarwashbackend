@@ -30,8 +30,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Initialize Firebase
 //firebase.initializeApp(firebaseConfig);
 //postlogin
-app.get("/",async(req,res)=>{
-  res.json({result:"ok",data:[1,2,3,4,5]})
+app.get('/', (req, res) => {
+  res.json({ message: 'Ahoy!' })
 })
 app.post("/logins", async (req, res) => {
   const user = req.body.username;
