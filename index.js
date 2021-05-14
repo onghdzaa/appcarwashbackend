@@ -10,6 +10,14 @@ app.use(express.json({limit: '50mb'}));
 app.get("/", (req, res) => {
   res.json({ message: 'Ahoy!' })
 })
+app.get("/test", async (req, res) => {
+  try {
+    res.json({ message: 'test' })
+  } catch (err) {
+    console.log("sss");
+    console.error(err.message);
+  }
+})
 app.listen(PORT, () => {
   console.log('Application is running on port '+PORT)
 })
