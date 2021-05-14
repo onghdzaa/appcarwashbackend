@@ -610,9 +610,9 @@ app.get('/', (req, res) => {
 //     console.error(err.message);
 //   }
 // });
-app.listen(port, () => {
+app.listen(80, () => {
   
-  console.log(port);
+  console.log(80);
 });
 // module.exports = {
 //   presets: [
