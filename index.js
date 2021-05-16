@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT=process.env.PORT || '80'
+const PORT=process.env.PORT || '5000'
 const cors = require("cors");
 const pool = require("./db");
 const bodyParser = require("body-parser");
@@ -597,4 +597,5 @@ app.put("/time", async (req, res) => {
 });
 app.listen(PORT, () => {
   console.log('Application is running on port '+PORT)
+  
 })
