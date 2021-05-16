@@ -5,9 +5,14 @@ const cors = require("cors");
 const pool = require("./db");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json({limit: '50mb', extended: true}));
+const corsOptions = {
+    origin: "https://radiant-garden-94337.herokuapp.com/",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
+  app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({limit: '50mb'}));
-app.use(cors());
+// app.use(cors());
 app.get("/", (req, res) => {
   res.json({ message: 'Ahoy!' })
 })
