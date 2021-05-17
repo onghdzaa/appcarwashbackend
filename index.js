@@ -6,8 +6,8 @@ const pool = require("./db");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 const corsOptions = {
-    origin: "https://radiant-garden-94337.herokuapp.com",
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        origin: ["https://radiant-garden-94337.herokuapp.com","http://localhost:8080"],
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   };
   app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
