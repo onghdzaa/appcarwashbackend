@@ -455,6 +455,7 @@ app.put("/statuschange5", async (req, res) => {
     );
     //console.log(req.body);
      //res.json(allLogin.rows);
+     res.send({ result: "pass" })
   } catch (err) {
     console.error(err.message);
   }
