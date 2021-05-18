@@ -441,7 +441,7 @@ app.put("/statuschange4", async (req, res) => {
       [req.body.status,req.body.imgpay,req.body.typepay,req.body.id]
     );
   // console.log(req.body);
-     //res.json(allLogin.rows);
+  res.send({ result: "pass" })
   } catch (err) {
     console.error(err.message);
   }
