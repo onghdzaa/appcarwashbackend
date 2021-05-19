@@ -601,17 +601,17 @@ app.put("/time", async (req, res) => {
     console.error(err.message);
   }
 });
-// app.put("/reset", async (req, res) => {
-//   try {
-//     const allLogin = await pool.query(
-//       "UPDATE staff SET time1 = 0, time2 = 0, time3 = 0, time4 = 0, time5 = 0, time6 = 0, time7 = 0, time8 = 0, time9 = 0"
-//     );
-//    // console.log("average");
-//      //res.json(allLogin.rows);
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// });
+app.put("/reset", async (req, res) => {
+  try {
+    const allLogin = await pool.query(
+      "UPDATE staff SET time1 = 0, time2 = 0, time3 = 0, time4 = 0, time5 = 0, time6 = 0, time7 = 0, time8 = 0, time9 = 0"
+    );
+   // console.log("average");
+     //res.json(allLogin.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 // app.delete("/deleteemployee", async (req, res) => {
 //   try {
 //     const allLogin = await pool.query(
