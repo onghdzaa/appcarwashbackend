@@ -299,7 +299,7 @@ app.put("/editemployee", async (req, res) => {
   try {
     const allLogin = await pool.query(
       "UPDATE staff SET Full_Name = $1, Tell_Staff = $2 ,img_staff=$3 ,username=$4,password=$5,email=$6,address=$7,model=$8,numcar=$9 WHERE Id_Staff=$10",
-      [req.body.name,req.body.tel,req.body.img,req.body.user,req.body.pass,req.body.email,req.body.address,req.body.modol,req.body.numcar,req.body.id]
+      [req.body.name,req.body.tel,req.body.img,req.body.user,req.body.pass,req.body.email,req.body.address,req.body.model,req.body.numcar,req.body.id]
     );
     console.log(allLogin.rowCount);
     if(allLogin.rowCount==0){
