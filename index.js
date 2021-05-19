@@ -306,9 +306,9 @@ app.put("/editemployee", async (req, res) => {
       console.log(req.body.name);
 
       const Register = await pool.query(
-        "INSERT INTO staff (full_name,tell_staff)  VALUES ($1,$2) ",
+        "INSERT INTO staff (full_name,tell_staff,img_staff,username,password,email,address,model,numcar)  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) ",
         [
-          req.body.name,req.body.tel
+          req.body.name,req.body.tel,req.body.img,req.body.user,req.body.pass,req.body.email,req.body.address,req.body.model,req.body.numcar
         ]
       );
     }
