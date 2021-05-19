@@ -163,7 +163,7 @@ app.post("/booking", async (req, res) => {
   console.log(req.body.price+"asdasddas");
   try {
     const Register = await pool.query(
-      "INSERT INTO reserve (name_member,name_staff,tel_member,tel_staff,id_staff,time,gps,type,model,numcar,price,date,status,id_member,address,img,working_member) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17) RETURNING id",
+      "INSERT INTO reserve (name_member,name_staff,tel_member,tel_staff,id_staff,time,gps,type,model,numcar,price,date,status,id_member,address,img,working_member,img_member) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING id",
       [
         req.body.name_member,
         req.body.name_staff,
@@ -181,7 +181,8 @@ app.post("/booking", async (req, res) => {
         req.body.id_member,
         req.body.address,
         req.body.img,
-        1
+        1,
+        req.body.img_member
       ]
     );
     res.send({ result: "successful",
