@@ -510,7 +510,7 @@ if(allLogin.rowCount>0){
 //gettoday calender
 app.get("/calender/today", async (req, res) => {
   try {
-    const allLogin = await pool.query("SELECT * FROM reserve WHERE DATE(date) = DATE(NOW()) AND(status='ชำระเงินเสร็จสิ้น' OR status='เสร็จสิ้น') ");
+    const allLogin = await pool.query("SELECT * FROM reserve WHERE DATE(date) = DATE(NOW()) AND status='ชำระเงินเสร็จสิ้น' OR status='เสร็จสิ้น' ");
   //  console.log(allLogin.rowCount);
  //  console.log(allLogin.rows);
     res.json(allLogin.rows);
