@@ -389,10 +389,10 @@ app.get("/profilerider", async (req, res) => {
 app.put("/statuschangebegin", async (req, res) => {
   try {
     const allLogin = await pool.query(
-      "UPDATE reserve SET status = $1 ,working = $2 WHERE id=$3",
+      "UPDATE reserve SET status = $1 ,working = $2 WHERE id=$3 RETURNING id_member",
       [req.body.status,req.body.working,req.body.id]
     );
- //   console.log(req.body);
+   //console.log(allLogin);
      //res.json(allLogin.rows);
      //noti
      const noti = await pool.query(
@@ -429,7 +429,7 @@ app.put("/statuschangebegin", async (req, res) => {
 app.put("/statuschange", async (req, res) => {
   try {
     const allLogin = await pool.query(
-      "UPDATE reserve SET status = $1 WHERE id=$2",
+      "UPDATE reserve SET status = $1 WHERE id=$2 RETURNING id_member",
       [req.body.status,req.body.id]
     );
 
@@ -567,7 +567,7 @@ app.get("/gps", async (req, res) => {
 app.put("/statuschange3", async (req, res) => {
   try {
     const allLogin = await pool.query(
-      "UPDATE reserve SET status = $1 , imgcar = $2  WHERE id=$3",
+      "UPDATE reserve SET status = $1 , imgcar = $2  WHERE id=$3 RETURNING id_member",
       [req.body.status,req.body.imgcar,req.body.id]
     );
       //noti
@@ -607,7 +607,7 @@ app.put("/statuschange3", async (req, res) => {
 app.put("/statuschange4", async (req, res) => {
   try {
     const allLogin = await pool.query(
-      "UPDATE reserve SET status = $1 , imgpay = $2, typepay=$3  WHERE id=$4",
+      "UPDATE reserve SET status = $1 , imgpay = $2, typepay=$3  WHERE id=$4 RETURNING id_member",
       [req.body.status,req.body.imgpay,req.body.typepay,req.body.id]
     );
   // console.log(req.body);
