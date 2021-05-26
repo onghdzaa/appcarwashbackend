@@ -3,6 +3,7 @@ const app = express()
 const PORT=process.env.PORT || '5000'
 const cors = require("cors");
 const pool = require("./db");
+const admin = require('firebase-admin');
 const bodyParser = require("body-parser");
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 const corsOptions = {
@@ -12,9 +13,35 @@ const corsOptions = {
   app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({limit: '50mb'}));
+const serviceAccount = require("./carwash-9ff16-firebase-adminsdk-8pguf-25ef1598fa.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
 // app.use(cors());
 app.get("/", (req, res) => {
   res.json({ message: 'Ahoy!' })
+  const registrationToken = 'epKZfEikYx1F-4atciRVxH:APA91bGoMdZgCJ4lHqywF5LBWQiitPpJ6w9ndSr8h3GDV3RlvVc6xEitMISec7rxH1a_t9j2kWu5TcZvQtOYPrPtXjcHgwKbfL4L0NfcpWLQxoho6zzqmQEOWQMFhR9p436KM7O0XWvS';
+
+  const message = {
+    notification: {
+      title: 'status',
+      body: "ล้างรถเสร็จแล้ว"
+      // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+    },
+    token: registrationToken
+  };
+  
+  // Send a message to the device corresponding to the provided
+  // registration token.
+  admin.messaging().send(message)
+    .then((response) => {
+      // Response is a message ID string.
+      console.log('Successfully sent message:', response);
+    })
+    .catch((error) => {
+      console.log('Error sending message:', error);
+    });
 })
 app.get("/test", async (req, res) => {
   try {
@@ -41,7 +68,7 @@ app.post("/logins", async (req, res) => {
         if (response.rowCount === 1) {
           console.log();
           console.log("case1");
-          res.send({ result: "successful", type: response.rows[0].type_admin });
+          res.send({ result: "successful", type: response.rows[0].type_admin,key:response.rows[0].keyfb});
         } else {
           res.send({ result: "error" });
         }
@@ -609,6 +636,48 @@ app.put("/reset", async (req, res) => {
     );
    // console.log("average");
      //res.json(allLogin.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+app.delete("/deletereserve", async (req, res) => {
+  try {
+    console.log(req.query.id);
+    const allLogin = await pool.query(
+      "DELETE FROM reserve WHERE id=$1;",
+      [req.query.id]
+    );
+    //console.log("average");
+     //res.json(allLogin.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+app.delete("/deleteemployee", async (req, res) => {
+  console.log(req.body.id);
+  console.log(req);
+  try {
+  //  console.log(req.query.id);
+    const allLogin = await pool.query(
+      "DELETE FROM staff WHERE id_staff=$1;",
+      [req.query.id]
+    );
+    //console.log("average");
+     //res.json(allLogin.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+app.put("/setkey", async (req, res) => {
+  try {
+    //console.log(req.body.id);
+     const allLogin = await pool.query(
+       "UPDATE login SET keyfb = $1  WHERE numid=$2",
+      [req.body.key,req.body.id]
+    );
+   // console.log(req.body.key);
+   // console.log(req.body.id);
+    // res.json(req.body.id);
   } catch (err) {
     console.error(err.message);
   }
