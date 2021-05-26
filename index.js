@@ -394,6 +394,33 @@ app.put("/statuschangebegin", async (req, res) => {
     );
  //   console.log(req.body);
      //res.json(allLogin.rows);
+     //noti
+     const noti = await pool.query(
+      "SELECT * FROM login WHERE numid=$1",
+      [allLogin.rows[0].id_member]
+    );
+    console.log(noti.rows[0].keyfb);
+    const registrationToken = noti.rows[0].keyfb;
+    
+    const message = {
+      notification: {
+        title: 'status',
+        body: req.body.status
+        // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+      },
+      token: registrationToken
+    };
+    
+    // Send a message to the device corresponding to the provided
+    // registration token.
+    admin.messaging().send(message)
+      .then((response) => {
+        // Response is a message ID string.
+        console.log('Successfully sent message:', response);
+      })
+      .catch((error) => {
+        console.log('Error sending message:', error);
+      });
   } catch (err) {
     console.error(err.message);
   }
@@ -405,8 +432,37 @@ app.put("/statuschange", async (req, res) => {
       "UPDATE reserve SET status = $1 WHERE id=$2",
       [req.body.status,req.body.id]
     );
+
+      //noti
+      const noti = await pool.query(
+        "SELECT * FROM login WHERE numid=$1",
+        [allLogin.rows[0].id_member]
+      );
+      console.log(noti.rows[0].keyfb);
+      const registrationToken = noti.rows[0].keyfb;
+      
+      const message = {
+        notification: {
+          title: 'status',
+          body: req.body.status
+          // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+        },
+        token: registrationToken
+      };
+      
+      // Send a message to the device corresponding to the provided
+      // registration token.
+      admin.messaging().send(message)
+        .then((response) => {
+          // Response is a message ID string.
+          console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+          console.log('Error sending message:', error);
+        });
   //  console.log(req);
      //res.json(allLogin.rows);
+     
   } catch (err) {
     console.error(err.message);
   }
@@ -422,32 +478,32 @@ app.get("/showinformation", async (req, res) => {
      res.json(allLogin.rows);
      console.log(allLogin.rows[0].id_member);
  //noti
- const noti = await pool.query(
-  "SELECT * FROM login WHERE numid=$1",
-  [allLogin.rows[0].id_member]
-);
-console.log(noti.rows[0].keyfb);
-const registrationToken = noti.rows[0].keyfb;
+//  const noti = await pool.query(
+//   "SELECT * FROM login WHERE numid=$1",
+//   [allLogin.rows[0].id_member]
+// );
+// console.log(noti.rows[0].keyfb);
+// const registrationToken = noti.rows[0].keyfb;
 
-const message = {
-  notification: {
-    title: 'status',
-    body: allLogin.rows[0].status
-    // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
-  },
-  token: registrationToken
-};
+// const message = {
+//   notification: {
+//     title: 'status',
+//     body: allLogin.rows[0].status
+//     // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+//   },
+//   token: registrationToken
+// };
 
-// Send a message to the device corresponding to the provided
-// registration token.
-admin.messaging().send(message)
-  .then((response) => {
-    // Response is a message ID string.
-    console.log('Successfully sent message:', response);
-  })
-  .catch((error) => {
-    console.log('Error sending message:', error);
-  });
+// // Send a message to the device corresponding to the provided
+// // registration token.
+// admin.messaging().send(message)
+//   .then((response) => {
+//     // Response is a message ID string.
+//     console.log('Successfully sent message:', response);
+//   })
+//   .catch((error) => {
+//     console.log('Error sending message:', error);
+//   });
 
   } catch (err) {
     console.error(err.message);
@@ -514,6 +570,33 @@ app.put("/statuschange3", async (req, res) => {
       "UPDATE reserve SET status = $1 , imgcar = $2  WHERE id=$3",
       [req.body.status,req.body.imgcar,req.body.id]
     );
+      //noti
+      const noti = await pool.query(
+        "SELECT * FROM login WHERE numid=$1",
+        [allLogin.rows[0].id_member]
+      );
+      console.log(noti.rows[0].keyfb);
+      const registrationToken = noti.rows[0].keyfb;
+      
+      const message = {
+        notification: {
+          title: 'status',
+          body: req.body.status
+          // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+        },
+        token: registrationToken
+      };
+      
+      // Send a message to the device corresponding to the provided
+      // registration token.
+      admin.messaging().send(message)
+        .then((response) => {
+          // Response is a message ID string.
+          console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+          console.log('Error sending message:', error);
+        });
    // console.log(req.body);
      //res.json(allLogin.rows);
   } catch (err) {
@@ -529,6 +612,33 @@ app.put("/statuschange4", async (req, res) => {
     );
   // console.log(req.body);
   res.send({ result: "pass" })
+    //noti
+    const noti = await pool.query(
+      "SELECT * FROM login WHERE numid=$1",
+      [allLogin.rows[0].id_member]
+    );
+    console.log(noti.rows[0].keyfb);
+    const registrationToken = noti.rows[0].keyfb;
+    
+    const message = {
+      notification: {
+        title: 'status',
+        body: req.body.status
+        // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+      },
+      token: registrationToken
+    };
+    
+    // Send a message to the device corresponding to the provided
+    // registration token.
+    admin.messaging().send(message)
+      .then((response) => {
+        // Response is a message ID string.
+        console.log('Successfully sent message:', response);
+      })
+      .catch((error) => {
+        console.log('Error sending message:', error);
+      });
   } catch (err) {
     console.error(err.message);
   }
