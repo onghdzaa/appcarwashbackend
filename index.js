@@ -393,7 +393,7 @@ app.put("/statuschangebegin", async (req, res) => {
       [req.body.status,req.body.working,req.body.id]
     );
    //console.log(allLogin);
-     //res.json(allLogin.rows);
+     res.json(allLogin.rows);
      //noti
      const noti = await pool.query(
       "SELECT * FROM login WHERE numid=$1",
@@ -432,7 +432,7 @@ app.put("/statuschange", async (req, res) => {
       "UPDATE reserve SET status = $1 WHERE id=$2 RETURNING id_member",
       [req.body.status,req.body.id]
     );
-
+    res.json(allLogin.rows);
       //noti
       const noti = await pool.query(
         "SELECT * FROM login WHERE numid=$1",
