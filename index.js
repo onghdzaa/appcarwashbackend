@@ -21,27 +21,27 @@ admin.initializeApp({
 // app.use(cors());
 app.get("/", (req, res) => {
   res.json({ message: 'Ahoy!' })
-  const registrationToken = 'epKZfEikYx1F-4atciRVxH:APA91bGoMdZgCJ4lHqywF5LBWQiitPpJ6w9ndSr8h3GDV3RlvVc6xEitMISec7rxH1a_t9j2kWu5TcZvQtOYPrPtXjcHgwKbfL4L0NfcpWLQxoho6zzqmQEOWQMFhR9p436KM7O0XWvS';
+  // const registrationToken = 'epKZfEikYx1F-4atciRVxH:APA91bGoMdZgCJ4lHqywF5LBWQiitPpJ6w9ndSr8h3GDV3RlvVc6xEitMISec7rxH1a_t9j2kWu5TcZvQtOYPrPtXjcHgwKbfL4L0NfcpWLQxoho6zzqmQEOWQMFhR9p436KM7O0XWvS';
 
-  const message = {
-    notification: {
-      title: 'status',
-      body: "ล้างรถเสร็จแล้ว"
-      // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
-    },
-    token: registrationToken
-  };
+  // const message = {
+  //   notification: {
+  //     title: 'status',
+  //     body: "ล้างรถเสร็จแล้ว"
+  //     // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+  //   },
+  //   token: registrationToken
+  // };
   
-  // Send a message to the device corresponding to the provided
-  // registration token.
-  admin.messaging().send(message)
-    .then((response) => {
-      // Response is a message ID string.
-      console.log('Successfully sent message:', response);
-    })
-    .catch((error) => {
-      console.log('Error sending message:', error);
-    });
+  // // Send a message to the device corresponding to the provided
+  // // registration token.
+  // admin.messaging().send(message)
+  //   .then((response) => {
+  //     // Response is a message ID string.
+  //     console.log('Successfully sent message:', response);
+  //   })
+  //   .catch((error) => {
+  //     console.log('Error sending message:', error);
+  //   });
 })
 app.get("/test", async (req, res) => {
   try {
@@ -420,6 +420,35 @@ app.get("/showinformation", async (req, res) => {
     );
     //console.log(allLogin.rows);
      res.json(allLogin.rows);
+     console.log(allLogin.rows[0].id_member);
+ //noti
+ const noti = await pool.query(
+  "SELECT * FROM login WHERE numid=$1",
+  [allLogin.rows[0].id_member]
+);
+console.log(noti.rows[0].keyfb);
+const registrationToken = noti.rows[0].keyfb;
+
+const message = {
+  notification: {
+    title: 'status',
+    body: allLogin.rows[0].status
+    // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+  },
+  token: registrationToken
+};
+
+// Send a message to the device corresponding to the provided
+// registration token.
+admin.messaging().send(message)
+  .then((response) => {
+    // Response is a message ID string.
+    console.log('Successfully sent message:', response);
+  })
+  .catch((error) => {
+    console.log('Error sending message:', error);
+  });
+
   } catch (err) {
     console.error(err.message);
   }
@@ -431,8 +460,38 @@ app.get("/showinformation5", async (req, res) => {
       "SELECT * FROM reserve WHERE id=$1",
       [req.query.id]
     );
-    //console.log(allLogin.rows);
+    console.log(req.query.id);
+    console.log(allLogin.rows[0].id_member);
      res.json(allLogin.rows);
+     // noti
+     const noti = await pool.query(
+      "SELECT * FROM login WHERE numid=$1",
+      [allLogin.rows[0].id_member]
+    );
+    console.log(noti.rows[0].keyfb);
+    const registrationToken = noti.rows[0].keyfb;
+
+    const message = {
+      notification: {
+        title: 'status',
+        body: "เสร็จสิ้นกรุณาให้คะแนนพนักงานขอบคุณครับ"
+        // {message:"ล้างรถเสร็จแล้ว",owner:"admin1"}
+      },
+      token: registrationToken
+    };
+    
+    // Send a message to the device corresponding to the provided
+    // registration token.
+    admin.messaging().send(message)
+      .then((response) => {
+        // Response is a message ID string.
+        console.log('Successfully sent message:', response);
+      })
+      .catch((error) => {
+        console.log('Error sending message:', error);
+      });
+
+
   } catch (err) {
     console.error(err.message);
   }
