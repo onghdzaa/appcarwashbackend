@@ -837,6 +837,21 @@ app.delete("/deleteemployee", async (req, res) => {
     console.error(err.message);
   }
 });
+app.delete("/deletelistcustomer", async (req, res) => {
+  //console.log(req.query.id);
+  //res.send
+  try {
+  //  console.log(req.query.id);
+    const allLogin = await pool.query(
+      "DELETE FROM reserve WHERE id=$1;",
+      [req.query.id]
+    );
+    //console.log("average");
+     res.json(req.query.id);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 app.put("/setkey", async (req, res) => {
   try {
     //console.log(req.body.id);
