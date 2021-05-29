@@ -137,7 +137,7 @@ app.get("/staff", async (req, res) => {
     const allLogin = await pool.query("SELECT * FROM staff");
     console.log(allLogin.rows[0].id_staff);
     //console.log(allLogin.rows.sort(function(a,b){return a.id_staff-b.id_staff}))
-    res.json(allLogin.rows.sort(function(a,b){return a.id_staff-b.id_staff}));
+    res.json(allLogin.rows.sort(function(a,b){return b.average-a.average}));
   } catch (err) {
     console.log("sss");
     console.error(err.message);
